@@ -6,9 +6,7 @@ import {
   Menu,
   X,
   ArrowLeft,
-  ExternalLink,
 } from "lucide-react";
-import { NatureZenLeaf } from "./NatureGraphics";
 import type { Project } from "../data/projectsData";
 
 type Props = {
@@ -35,8 +33,8 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
       <div
         className={`pointer-events-auto flex items-center justify-between gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${
           scrolled
-            ? "border-emerald-900/15 bg-white/95 shadow-md shadow-emerald-950/5 backdrop-blur-xl"
-            : "border-emerald-900/10 bg-white/85 shadow-sm backdrop-blur-md"
+            ? "border-slate-300/80 bg-white/95 shadow-md shadow-slate-950/5 backdrop-blur-xl"
+            : "border-slate-200/90 bg-white/90 shadow-sm backdrop-blur-md"
         }`}
       >
         {/* Left: Brand / Identity OR Back Button */}
@@ -51,24 +49,25 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
             </button>
           ) : (
             <a href="#" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
-                <NatureZenLeaf className="w-4 h-4 text-emerald-200" />
+              {/* Minimalist Monogram AJ */}
+              <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-cinzel font-bold text-xs tracking-wider shadow-sm group-hover:bg-emerald-800 transition-all">
+                AJ
               </div>
 
               <div className="flex flex-col">
                 <span className="font-cinzel text-xs sm:text-sm font-black tracking-widest text-slate-900 group-hover:text-emerald-800 transition-colors">
                   AKASH JADON
                 </span>
-                <span className="hidden sm:inline-block text-[9px] font-mono tracking-widest text-emerald-800 font-semibold uppercase">
-                  EVOLNEX.DIGITAL
+                <span className="hidden sm:inline-block text-[9px] font-mono tracking-widest text-slate-500 font-semibold uppercase">
+                  SYSTEMS & AI ARCHITECT
                 </span>
               </div>
             </a>
           )}
 
-          {/* Lead Architect Live Chip */}
+          {/* Lead Architect Live Status Chip */}
           {!activeProject && (
-            <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-[10px] font-mono text-emerald-800">
+            <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50/80 px-2.5 py-0.5 text-[10px] font-mono font-semibold text-emerald-800">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
               <span>LEAD ARCHITECT</span>
             </div>
@@ -105,14 +104,14 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
           </nav>
         )}
 
-        {/* Right: Actions (Resume + GitHub + Mobile Toggle) */}
+        {/* Right: Actions (Resume + GitHub + Contact + Mobile Toggle) */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Resume Download / View Button */}
           <a
             href="/Akash_Jadon_CV.pdf"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200/80 px-3.5 py-1.5 text-xs font-cinzel font-bold tracking-wider shadow-sm transition-all hover:scale-105"
+            className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-300/80 px-3.5 py-1.5 text-xs font-cinzel font-bold tracking-wider shadow-sm transition-all hover:scale-105"
             title="Download Akash Jadon Resume (PDF)"
           >
             <FileDown className="w-3.5 h-3.5 text-sky-700" />
@@ -153,7 +152,7 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto md:hidden mt-2 p-5 rounded-3xl border border-emerald-900/15 bg-white/95 shadow-xl backdrop-blur-2xl animate-in slide-in-from-top-4 duration-300">
+        <div className="pointer-events-auto md:hidden mt-2 p-5 rounded-3xl border border-slate-200 bg-white/95 shadow-xl backdrop-blur-2xl animate-in slide-in-from-top-4 duration-300">
           <nav className="flex flex-col gap-3 font-cinzel font-bold text-sm text-slate-800">
             <a
               href="#systems"

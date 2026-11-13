@@ -34,7 +34,7 @@ export default function Hero({ onSelectProject }: HeroProps) {
           >
             {/* Calming Role Pill */}
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-600/25 bg-emerald-50/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-emerald-900 mb-6 shadow-sm">
-              <NatureZenLeaf className="w-3.5 h-3.5 text-emerald-700" />
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
               <span className="font-cinzel tracking-wider text-[11px] sm:text-xs font-bold">
                 AKASH JADON · LEAD SYSTEMS ARCHITECT
               </span>

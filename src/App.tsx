@@ -190,7 +190,7 @@ export default function App() {
 
       {/* Sovereign Verified Badge */}
       <div className="fixed bottom-4 left-4 z-40 hidden items-center gap-2 rounded-full border border-emerald-600/20 bg-white/90 px-3.5 py-1.5 text-xs text-slate-800 backdrop-blur-md no-print md:flex shadow-sm">
-        <NatureZenLeaf className="h-3.5 w-3.5 text-emerald-700" />
+        <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
         <span className="font-cinzel tracking-wider text-[11px] font-bold text-emerald-950">
           Staff / Lead Architect · Evolnex Digital
         </span>

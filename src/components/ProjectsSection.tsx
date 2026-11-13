@@ -55,7 +55,7 @@ export default function ProjectsSection({ onSelectProject }: Props) {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50 px-4 py-1.5 text-xs font-semibold text-emerald-900 mb-4 shadow-sm"
           >
-            <NatureZenLeaf className="w-3.5 h-3.5 text-emerald-700" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
             <span className="font-cinzel tracking-widest">SOVEREIGN SYSTEMS REPOSITORY</span>
           </motion.div>
 
