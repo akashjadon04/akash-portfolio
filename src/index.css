@@ -205,13 +205,7 @@ h1, h2, h3, h4, .font-cinzel {
   background: #6d28d9;
 }
 
-@font-face {
-  font-family: 'PP Neue Corp Wide';
-  src: url('/fonts/PPNeueCorp-WideUltrabold.woff2') format('woff2');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
+/* PP Neue Corp Wide fallback mapped to font-cinzel */
 
 /* ==========================================================================
    21st.dev Osmo Parallax Scrolling Styles
@@ -268,83 +262,7 @@ h1, h2, h3, h4, .font-cinzel {
   backface-visibility: hidden;
 }
 
-/* Authentic Fluffy White Cumulus Cloud Header */
-.cloud-header {
-  position: fixed;
-  top: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 0.65rem 2.2rem;
-  border-radius: 9999px;
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  box-shadow: 
-    0 12px 28px -4px rgba(0, 0, 0, 0.25),
-    0 0 20px rgba(255, 255, 255, 0.9),
-    inset 0 -2px 4px rgba(203, 213, 225, 0.4),
-    inset 0 2px 4px #ffffff;
-  max-width: calc(100vw - 2rem);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Bilateral Cumulus Cloud Puff Lobes on Top */
-.cloud-header::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 18%;
-  width: 44px;
-  height: 24px;
-  border-radius: 50% 50% 0 0;
-  background: #ffffff;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
-  pointer-events: none;
-}
-
-.cloud-header::after {
-  content: '';
-  position: absolute;
-  top: -16px;
-  right: 22%;
-  width: 56px;
-  height: 30px;
-  border-radius: 50% 50% 0 0;
-  background: #ffffff;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04), inset 0 2px 3px #ffffff;
-  pointer-events: none;
-}
-
-.cloud-header:hover {
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 
-    0 16px 36px -4px rgba(0, 0, 0, 0.3),
-    0 0 28px rgba(255, 255, 255, 1);
-}
-
-@media (max-width: 640px) {
-  .cloud-header {
-    top: 0.6rem;
-    padding: 0.45rem 1.25rem;
-    gap: 0.75rem;
-    max-width: calc(100vw - 1.5rem);
-  }
-  .cloud-header::before {
-    top: -9px;
-    left: 16%;
-    width: 32px;
-    height: 18px;
-  }
-  .cloud-header::after {
-    top: -12px;
-    right: 20%;
-    width: 40px;
-    height: 22px;
-  }
-}
+/* Header styling handled in Header.tsx with modern glassmorphism */
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

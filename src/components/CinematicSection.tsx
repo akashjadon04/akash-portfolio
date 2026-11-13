@@ -410,7 +410,7 @@ export default function CinematicSection() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-[11px] font-bold text-white tracking-tight truncate">TandemFlow Sync Mesh</div>
-                            <div className="text-[9px] text-amber-300/70 truncate">sync.evolvix · 246 Synced Nodes</div>
+                            <div className="text-[9px] text-amber-300/70 truncate">sync.evolnex.digital · 246 Synced Nodes</div>
                           </div>
                         </div>
 

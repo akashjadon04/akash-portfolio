@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, GitBranch, Phone, Sparkles, Terminal, Globe } from "lucide-react";
+import { Mail, GitBranch, Phone, Sparkles, Terminal, FileDown, ArrowRight, Building2 } from "lucide-react";
 
 export default function ClosingPage() {
   return (
@@ -24,31 +24,47 @@ export default function ClosingPage() {
 
         {/* Lead Architect Credentials Box */}
         <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-amber-600/30 bg-amber-50/90 p-6 md:p-8 text-left shadow-lg">
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2.5 font-cinzel text-lg font-bold text-amber-950">
               <Terminal className="h-5 w-5 text-amber-800" />
-              <span>Akash Jadon · Lead Systems & Automation Architect</span>
+              <span>Akash Jadon · Lead Systems, Full-Stack & Agentic AI Architect</span>
             </div>
-            <span className="hidden sm:inline-block rounded-full bg-amber-200/60 px-3 py-1 text-xs font-semibold text-amber-900 font-cinzel">
-              Evolvix Technology
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-200/80 border border-amber-400/40 px-3 py-1 text-xs font-semibold text-amber-950 font-cinzel">
+              <Building2 className="w-3.5 h-3.5 text-amber-800" />
+              Evolnex Digital
             </span>
           </div>
           <p className="font-inter text-sm md:text-base leading-relaxed text-stone-800">
-            Delivering sovereign backend fabrics, autonomous agent DAG orchestrators, high-concurrency event telemetry, and production Make.com / n8n enterprise workflows for global clients and high-velocity engineering teams.
+            Delivering sovereign backend fabrics, autonomous agent DAG orchestrators, high-concurrency event telemetry, and production Make.com / n8n enterprise workflows for global clients and high-velocity engineering teams at Evolnex Digital.
           </p>
+
+          <div className="mt-6 pt-5 border-t border-amber-900/10 flex flex-wrap items-center justify-between gap-3">
+            <div className="text-xs text-stone-600 font-mono">
+              Verified Experience: 4+ Years · 13 Shipped Systems · 100+ MCP Tools
+            </div>
+            <a
+              href="/Akash_Jadon_CV.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-4 py-2 text-xs font-cinzel font-bold shadow-md transition-all hover:scale-105"
+            >
+              <FileDown className="w-4 h-4" />
+              <span>View & Download Resume (CV)</span>
+            </a>
+          </div>
         </div>
 
         {/* Direct Contact Cards */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           <a
-            href="mailto:evolvixtechnology@gmail.com"
+            href="mailto:contact@evolnex.digital"
             className="group flex flex-col items-center gap-2.5 rounded-2xl border border-fable-purple/20 bg-white/90 p-5 shadow-sm transition hover:-translate-y-1 hover:border-fable-purple/50 hover:shadow-md"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-fable-purple to-fable-royal text-white shadow-md">
               <Mail className="h-5 w-5" />
             </div>
             <span className="font-cinzel font-bold text-xs uppercase tracking-wider text-fable-midnight">Email Dispatch</span>
-            <span className="text-xs text-stone-600 font-mono truncate w-full px-1">evolvixtechnology@gmail.com</span>
+            <span className="text-xs text-stone-600 font-mono truncate w-full px-1">contact@evolnex.digital</span>
           </a>
 
           <a
@@ -94,7 +110,7 @@ export default function ClosingPage() {
         </div>
 
         <p className="mt-14 font-cinzel text-xs font-semibold uppercase tracking-[0.3em] text-amber-900/60">
-          Akash Jadon · Sovereign Systems & AI Automation Architect · 2026
+          Akash Jadon · Lead Systems, Full-Stack & Agentic AI Architect · Evolnex Digital · 2026
         </p>
       </motion.div>
     </div>

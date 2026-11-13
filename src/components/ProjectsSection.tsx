@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Layers, Bot, Cpu, Network, ShieldCheck, Sparkles, Filter } from "lucide-react";
+import { Layers, Bot, Cpu, Network, ShieldCheck, Sparkles, Filter, FileDown } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import { sovereignProjects, type Project, type ProjectCategory } from "../data/projectsData";
@@ -23,14 +23,26 @@ const categories: { label: CategoryTab; count: number }[] = [
   },
 ];
 
-export default function ProjectsSection() {
+type Props = {
+  onSelectProject?: (project: Project) => void;
+};
+
+export default function ProjectsSection({ onSelectProject }: Props) {
   const [activeTab, setActiveTab] = useState<CategoryTab>("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [modalProject, setModalProject] = useState<Project | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (activeTab === "All") return sovereignProjects;
     return sovereignProjects.filter((p) => p.category === activeTab);
   }, [activeTab]);
+
+  const handleCardClick = (project: Project) => {
+    if (onSelectProject) {
+      onSelectProject(project);
+    } else {
+      setModalProject(project);
+    }
+  };
 
   return (
     <section
@@ -74,7 +86,7 @@ export default function ProjectsSection() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-3 text-stone-300 font-inter text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
           >
-            Explore sovereign distributed state engines, multi-agent LLM harnesses, and resilient SaaS fabrics built with zero-tolerance for failure.
+            Explore sovereign distributed state engines, multi-agent LLM harnesses, and resilient SaaS fabrics built with zero-tolerance for failure. Click on any system for full deep-dive architectural specifications.
           </motion.p>
         </div>
 
@@ -118,7 +130,7 @@ export default function ProjectsSection() {
               key={project.id}
               project={project}
               index={idx}
-              onSelect={(p) => setSelectedProject(p)}
+              onSelect={handleCardClick}
             />
           ))}
         </div>
@@ -150,12 +162,22 @@ export default function ProjectsSection() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <a
+              href="/Akash_Jadon_CV.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-fable-midnight px-5 py-3 font-cinzel font-bold text-xs text-amber-300 transition-all hover:scale-105"
+            >
+              <FileDown className="w-4 h-4" />
+              <span>Download Resume (CV)</span>
+            </a>
+
             <a
               href="https://github.com/akashjadon04"
               target="_blank"
               rel="noreferrer"
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-6 py-3 font-cinzel font-bold text-xs text-fable-midnight shadow-lg shadow-amber-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-6 py-3 font-cinzel font-bold text-xs text-fable-midnight shadow-lg shadow-amber-500/20 transition-all hover:scale-105"
             >
               <span>Explore GitHub Organizations</span>
               <Sparkles className="w-3.5 h-3.5" />
@@ -164,10 +186,10 @@ export default function ProjectsSection() {
         </motion.div>
       </div>
 
-      {/* Enlarged Architecture Modal with Backdrop Blur */}
+      {/* Fallback Modal */}
       <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
+        project={modalProject}
+        onClose={() => setModalProject(null)}
       />
     </section>
   );

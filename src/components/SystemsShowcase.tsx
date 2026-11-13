@@ -10,7 +10,7 @@ const showcases = [
   {
     id: "tandem-flow",
     title: "TandemFlow",
-    domain: "sync.evolvix",
+    domain: "sync.evolnex.digital",
     href: "https://github.com/akashjadon04/tandem-flow",
     category: "Distributed State Synchronization",
     image: "/images/projects/tandem-flow.svg",
@@ -48,11 +48,15 @@ const showcases = [
   },
 ];
 
-export default function SystemsShowcase() {
+type Props = {
+  onSelectProject?: (project: Project) => void;
+};
+
+export default function SystemsShowcase({ onSelectProject }: Props) {
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
   const card3Ref = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [modalProject, setModalProject] = useState<Project | null>(null);
 
   useEffect(() => {
     const isDesktop =
@@ -84,14 +88,20 @@ export default function SystemsShowcase() {
     };
   }, []);
 
-  const handleOpenModal = (projectId: string) => {
+  const handleProjectClick = (projectId: string) => {
     const found = sovereignProjects.find((p) => p.id === projectId);
-    if (found) setSelectedProject(found);
+    if (!found) return;
+
+    if (onSelectProject) {
+      onSelectProject(found);
+    } else {
+      setModalProject(found);
+    }
   };
 
   return (
     <div
-      id="systems"
+      id="showcase"
       className="relative w-full bg-gradient-to-b from-[#0b0416] via-[#110624] to-fable-midnight px-4 py-16 sm:py-24 md:px-8 lg:px-12 text-white font-sans overflow-hidden"
     >
       <div className="film-grain" aria-hidden="true" />
@@ -149,7 +159,7 @@ export default function SystemsShowcase() {
                 <div 
                   ref={ref} 
                   className="atropos w-full rounded-2xl cursor-pointer flex-1"
-                  onClick={() => handleOpenModal(item.projectId)}
+                  onClick={() => handleProjectClick(item.projectId)}
                 >
                   <div className="atropos-scale">
                     <div className="atropos-rotate">
@@ -211,7 +221,7 @@ export default function SystemsShowcase() {
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleOpenModal(item.projectId);
+                                handleProjectClick(item.projectId);
                               }}
                               className="inline-flex items-center justify-center rounded-xl bg-amber-400 text-fable-midnight px-3 py-2 text-xs font-cinzel font-bold transition hover:bg-amber-300 shadow-md"
                             >
@@ -274,8 +284,8 @@ export default function SystemsShowcase() {
       </div>
 
       <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
+        project={modalProject}
+        onClose={() => setModalProject(null)}
       />
     </div>
   );
