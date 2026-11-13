@@ -1,29 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fable-midnight: #1a0b2e;
-  --color-fable-purple: #4c1d95;
-  --color-fable-royal: #6d28d9;
-  --color-fable-emerald: #065f46;
-  --color-fable-gold: #fbbf24;
-  --color-fable-amber: #d97706;
-  --color-fable-parchment: #f5e6c8;
-  --color-fable-cream: #fff9ed;
+  --color-nature-canvas: #fbfdfa;
+  --color-nature-linen: #f4f7f4;
+  --color-nature-forest: #14532d;
+  --color-nature-emerald: #15803d;
+  --color-nature-sage: #059669;
+  --color-nature-leaf: #dcfce7;
+  --color-nature-sky: #0284c7;
+  --color-nature-water: #e0f2fe;
+  --color-nature-sun: #ea580c;
+  --color-nature-warmth: #ffedd5;
+  --color-nature-slate: #0f172a;
 }
 
 :root {
-  --fable-midnight: #1a0b2e;
-  --fable-purple: #4c1d95;
-  --fable-royal: #6d28d9;
-  --fable-emerald: #065f46;
-  --fable-gold: #fbbf24;
-  --fable-amber: #d97706;
-  --fable-parchment: #f5e6c8;
-  --fable-cream: #fff9ed;
+  --nature-canvas: #fbfdfa;
+  --nature-linen: #f4f7f4;
+  --nature-forest: #14532d;
+  --nature-emerald: #15803d;
+  --nature-sage: #059669;
+  --nature-leaf: #dcfce7;
+  --nature-sky: #0284c7;
+  --nature-water: #e0f2fe;
+  --nature-sun: #ea580c;
+  --nature-warmth: #ffedd5;
+  --nature-slate: #0f172a;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: #fbfdfa;
+  color: #0f172a;
 }
 
 /* Lenis smooth scroll */
@@ -44,12 +52,11 @@ html.lenis, html.lenis body {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: radial-gradient(ellipse at top, #2e1065 0%, #1a0b2e 50%, #020617 100%);
-  color: #fff9ed;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fbfdfa;
+  color: #1e293b;
   overflow-x: hidden;
 }
-
 
 h1, h2, h3, h4, .font-cinzel {
   font-family: 'Cinzel', serif;
@@ -63,466 +70,60 @@ h1, h2, h3, h4, .font-cinzel {
   font-family: 'Inter', sans-serif;
 }
 
-/* Parchment texture overlay (GPU accelerated, no heavy SVG filter) */
-.parchment {
-  background-color: #fff9ed;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(217, 119, 6, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(76, 29, 149, 0.06) 0%, transparent 40%);
-  color: #2a1b0a;
-}
-
-/* Gold shimmer gradient text */
-.gold-text {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 35%, #fde68a 55%, #d97706 100%);
+/* Nature calming gradients */
+.nature-gradient-text {
+  background: linear-gradient(135deg, #14532d 0%, #15803d 40%, #0284c7 80%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Ornate border */
-.ornate-border {
-  position: relative;
-  border: 2px solid rgba(251, 191, 36, 0.4);
-  border-radius: 1.25rem;
-}
-.ornate-border::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 1.5rem;
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(251,191,36,0.8), rgba(76,29,149,0.6), rgba(251,191,36,0.8));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.forest-gradient-text {
+  background: linear-gradient(135deg, #14532d 0%, #166534 60%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Magical glow */
-.glow-gold {
-  box-shadow: 0 0 40px rgba(251, 191, 36, 0.25), inset 0 0 20px rgba(251, 191, 36, 0.05);
-}
-.glow-purple {
-  box-shadow: 0 0 60px rgba(109, 40, 217, 0.35);
-}
-
-/* Floating particles */
-.particles {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.particle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
-  border-radius: 50%;
-  opacity: 0.4;
-  will-change: transform;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-  50% { transform: translateY(-40vh) translateX(20px); opacity: 0.8; }
+.sky-orange-text {
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Print optimization */
-@media print {
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  html, body {
-    background: #fff9ed !important;
-    color: #2a1b0a !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .no-print {
-    display: none !important;
-  }
-  .page {
-    min-height: 297mm;
-    width: 210mm;
-    break-after: page;
-    page-break-after: always;
-    overflow: hidden;
-    padding: 16mm;
-    box-sizing: border-box;
-    background: #fff9ed !important;
-  }
-  .page:last-child {
-    break-after: auto;
-    page-break-after: auto;
-  }
-  .parchment {
-    background: #fff9ed !important;
-  }
-  .gold-text {
-    -webkit-text-fill-color: #b45309 !important;
-    color: #b45309 !important;
-    background: none !important;
-  }
-  img {
-    max-width: 100%;
-    page-break-inside: avoid;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  .print-link::after {
-    content: " (" attr(href) ")";
-    font-size: 0.75rem;
-    color: #7c2d12;
-  }
-}
-
-/* Web experience background sections */
-.section-dark {
-  background: linear-gradient(180deg, rgba(26,11,46,0.95) 0%, rgba(46,16,101,0.9) 100%);
-}
-.section-parchment {
-  background: #fff9ed;
-  color: #2a1b0a;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #1a0b2e;
-}
-::-webkit-scrollbar-thumb {
-  background: #4c1d95;
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #6d28d9;
-}
-
-/* PP Neue Corp Wide fallback mapped to font-cinzel */
-
-/* ==========================================================================
-   21st.dev Osmo Parallax Scrolling Styles
-   ========================================================================== */
-.parallax {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.parallax__header {
-  z-index: 2;
-  justify-content: center;
-  align-items: center;
-  min-height: 100svh;
-  height: 100vh;
-  padding: 0;
-  display: flex;
-  position: relative;
-}
-
-.parallax__visuals {
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 120%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.parallax__layers {
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-
-.parallax__layer-img {
-  pointer-events: none;
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 117.5%;
-  position: absolute;
-  top: -17.5%;
-  left: 0;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-/* Header styling handled in Header.tsx with modern glassmorphism */
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Ensure touch scrolling on mobile cards is never blocked */
-@media (max-width: 768px), (pointer: coarse) {
-  .atropos,
-  .atropos-scale,
-  .atropos-rotate,
-  .atropos-inner,
-  .atropos * {
-    touch-action: pan-y !important;
-  }
-}
-
-
-
-/* ==========================================================================
-   21st.dev Osmo Parallax Scrolling Styles (Exact Spec)
-   ========================================================================== */
-.parallax {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.parallax__header {
-  z-index: 2;
-  justify-content: center;
-  align-items: center;
-  min-height: 100svh;
-  padding: 100px 50px;
-  display: flex;
-  position: relative;
-}
-
-.parallax__visuals {
-  object-fit: cover;
-  width: 100%;
-  height: 120%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.parallax__layers {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.parallax__layer-img {
-  pointer-events: none;
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 117.5%;
-  position: absolute;
-  top: -17.5%;
-  left: 0;
-}
-
-.parallax__layer-title {
-  z-index: 3;
-  text-align: center;
-  transform-origin: 50% 0;
-  width: 100%;
-  position: absolute;
-  top: 32%;
-  left: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.parallax__title {
-  pointer-events: auto;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 0.1em;
-  margin-right: 0.075em;
-  font-family: 'PP Neue Corp Wide', sans-serif;
-  font-size: clamp(3.5rem, 11vw, 11vw);
-  font-weight: 800;
-  line-height: 1;
-  color: #ffffff;
-  position: relative;
-  user-select: none;
-}
-
-.parallax__fade {
-  z-index: 30;
-  object-fit: cover;
-  width: 100%;
-  max-width: none;
-  height: 20%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(#0000, #00000001 1.8%, #00000002 4.8%, #00000005 9%, #0000000b 13.9%, #00000013 19.8%, #00000020 27%, #00000031 35%, #00000047 43.5%, #00000061 53%, #0000008a 66%, #000000bc 81%, #000);
-}
-
-.parallax__black-line-overflow {
-  z-index: 20;
-  background-color: #000;
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-}
-
-/* ==========================================================================
-   21st.dev EaseMize Cinematic Landing Section Styles
-   ========================================================================== */
-.gsap-reveal {
-  visibility: hidden;
+/* Calming Subtle Grid & Grain */
+.bg-nature-grid {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(20, 83, 45, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 83, 45, 0.04) 1px, transparent 1px);
 }
 
 .film-grain {
-  display: none;
-}
-
-.bg-grid-theme {
-  background-size: 60px 60px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-}
-
-.text-3d-matte {
-  color: #ffffff;
-  text-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.5), 
-    0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.text-silver-matte {
-  background: linear-gradient(180deg, #FFFFFF 0%, #D4D4D8 45%, #71717A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transform: translateZ(0);
-  filter: 
-    drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.5)) 
-    drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.text-card-silver-matte {
-  background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E7 40%, #71717A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transform: translateZ(0);
-  filter: 
-    drop-shadow(0px 12px 24px rgba(0, 0, 0, 0.8)) 
-    drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.6));
-}
-
-.premium-depth-card {
-  background: linear-gradient(145deg, #1e0b3d 0%, #0d041c 50%, #020617 100%);
-  box-shadow: 
-    0 40px 100px -20px rgba(0, 0, 0, 0.95),
-    0 20px 40px -20px rgba(0, 0, 0, 0.85),
-    inset 0 1px 2px rgba(251, 191, 36, 0.25),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(251, 191, 36, 0.15);
-  position: relative;
-}
-
-.card-sheen {
   position: absolute;
   inset: 0;
-  border-radius: inherit;
   pointer-events: none;
-  z-index: 50;
-  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(251, 191, 36, 0.08) 0%, rgba(255, 255, 255, 0.04) 20%, transparent 50%);
-  mix-blend-mode: screen;
-  transition: opacity 0.3s ease;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.iphone-bezel {
-  background-color: #111;
-  box-shadow: 
-    inset 0 0 0 2px #52525B, 
-    inset 0 0 0 7px #000, 
-    0 40px 80px -15px rgba(0, 0, 0, 0.9),
-    0 15px 25px -5px rgba(0, 0, 0, 0.7);
-  transform-style: preserve-3d;
+/* Natural soft shadows */
+.nature-card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(20, 83, 45, 0.05), 0 2px 6px -1px rgba(2, 132, 199, 0.04);
 }
 
-.hardware-btn {
-  background: linear-gradient(90deg, #404040 0%, #171717 100%);
-  box-shadow: 
-    -2px 0 5px rgba(0, 0, 0, 0.8),
-    inset -1px 0 1px rgba(255, 255, 255, 0.15),
-    inset 1px 0 2px rgba(0, 0, 0, 0.8);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+.nature-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.screen-glare {
-  background: linear-gradient(110deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%);
-}
-
-.widget-depth {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
-  box-shadow: 
-    0 10px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.floating-ui-badge {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(24px); 
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 
-    0 0 0 1px rgba(251, 191, 36, 0.2),
-    0 25px 50px -12px rgba(0, 0, 0, 0.8),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.btn-modern-light, .btn-modern-dark {
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.btn-modern-light {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
-  color: #0F172A;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.1), 0 12px 24px -4px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,1), inset 0 -3px 6px rgba(0,0,0,0.06);
-}
-.btn-modern-light:hover {
+.nature-card-hover:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 6px 12px -2px rgba(0,0,0,0.15), 0 20px 32px -6px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,1), inset 0 -3px 6px rgba(0,0,0,0.06);
-}
-.btn-modern-dark {
-  background: linear-gradient(180deg, #27272A 0%, #18181B 100%);
-  color: #FFFFFF;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.6), 0 12px 24px -4px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -3px 6px rgba(0,0,0,0.8);
-}
-.btn-modern-dark:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(180deg, #3F3F46 0%, #27272A 100%);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 6px 12px -2px rgba(0,0,0,0.7), 0 20px 32px -6px rgba(0,0,0,1), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(0,0,0,0.8);
+  box-shadow: 0 16px 36px -4px rgba(20, 83, 45, 0.09), 0 6px 14px -2px rgba(234, 88, 12, 0.05);
 }
 
-.progress-ring {
-  transform: rotate(-90deg);
-  transform-origin: center;
-  stroke-dasharray: 402;
-  stroke-dashoffset: 402;
-  stroke-linecap: round;
+/* Print styling */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
-
-

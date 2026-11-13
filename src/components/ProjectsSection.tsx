@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Layers, Bot, Cpu, Network, ShieldCheck, Sparkles, Filter, FileDown } from "lucide-react";
+import { Layers, ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
-import ProjectModal from "./ProjectModal";
+import { NatureTopography, NatureZenLeaf } from "./NatureGraphics";
 import { sovereignProjects, type Project, type ProjectCategory } from "../data/projectsData";
 
 type CategoryTab = "All" | ProjectCategory;
@@ -29,31 +29,21 @@ type Props = {
 
 export default function ProjectsSection({ onSelectProject }: Props) {
   const [activeTab, setActiveTab] = useState<CategoryTab>("All");
-  const [modalProject, setModalProject] = useState<Project | null>(null);
 
   const filteredProjects = useMemo(() => {
     if (activeTab === "All") return sovereignProjects;
     return sovereignProjects.filter((p) => p.category === activeTab);
   }, [activeTab]);
 
-  const handleCardClick = (project: Project) => {
-    if (onSelectProject) {
-      onSelectProject(project);
-    } else {
-      setModalProject(project);
-    }
-  };
-
   return (
     <section
       id="projects"
-      className="relative w-full bg-gradient-to-b from-fable-midnight via-[#0b0318] to-[#120524] px-4 py-20 sm:py-28 md:px-8 lg:px-12 text-white font-sans overflow-hidden"
+      className="relative w-full bg-[#fbfdfa] px-4 py-20 sm:py-28 md:px-8 lg:px-12 text-slate-900 font-sans overflow-hidden"
     >
       {/* Background accents */}
-      <div className="film-grain" aria-hidden="true" />
-      <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-30" aria-hidden="true" />
-      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-10 w-[500px] h-[500px] bg-amber-400/10 rounded-full blur-[140px] pointer-events-none" />
+      <NatureTopography className="opacity-30" />
+      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-10 w-[500px] h-[500px] bg-sky-100/50 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section Header */}
@@ -63,9 +53,9 @@ export default function ProjectsSection({ onSelectProject }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-semibold text-amber-300 mb-4"
+            className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50 px-4 py-1.5 text-xs font-semibold text-emerald-900 mb-4 shadow-sm"
           >
-            <Layers className="w-3.5 h-3.5 text-amber-400" />
+            <NatureZenLeaf className="w-3.5 h-3.5 text-emerald-700" />
             <span className="font-cinzel tracking-widest">SOVEREIGN SYSTEMS REPOSITORY</span>
           </motion.div>
 
@@ -74,9 +64,12 @@ export default function ProjectsSection({ onSelectProject }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white"
+            className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
           >
-            Engineered For <span className="gold-text">Autonomous Scale</span>
+            Engineered For{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-sky-700 to-orange-600">
+              Autonomous Scale
+            </span>
           </motion.h2>
 
           <motion.p
@@ -84,9 +77,9 @@ export default function ProjectsSection({ onSelectProject }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-3 text-stone-300 font-inter text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+            className="mt-3 text-slate-600 font-inter text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
           >
-            Explore sovereign distributed state engines, multi-agent LLM harnesses, and resilient SaaS fabrics built with zero-tolerance for failure. Click on any system for full deep-dive architectural specifications.
+            Explore sovereign distributed state engines, multi-agent LLM harnesses, and resilient SaaS fabrics built with zero-tolerance for failure.
           </motion.p>
         </div>
 
@@ -106,14 +99,14 @@ export default function ProjectsSection({ onSelectProject }: Props) {
                 onClick={() => setActiveTab(cat.label)}
                 className={`flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 text-xs font-cinzel font-bold transition-all ${
                   isActive
-                    ? "bg-amber-400 text-fable-midnight shadow-lg shadow-amber-500/25 scale-105 border border-amber-400"
-                    : "bg-white/5 text-stone-300 hover:text-white hover:bg-white/10 border border-white/10"
+                    ? "bg-emerald-800 text-white shadow-sm border border-emerald-800 scale-105"
+                    : "bg-white text-slate-700 hover:text-emerald-900 hover:bg-emerald-50/60 border border-slate-200/90 shadow-sm"
                 }`}
               >
                 <span>{cat.label}</span>
                 <span
                   className={`rounded-full px-2 py-0.5 text-[10px] ${
-                    isActive ? "bg-fable-midnight/20 text-fable-midnight" : "bg-white/10 text-stone-400"
+                    isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
                   }`}
                 >
                   {cat.count}
@@ -130,7 +123,9 @@ export default function ProjectsSection({ onSelectProject }: Props) {
               key={project.id}
               project={project}
               index={idx}
-              onSelect={handleCardClick}
+              onSelect={(p) => {
+                if (onSelectProject) onSelectProject(p);
+              }}
             />
           ))}
         </div>
@@ -141,56 +136,40 @@ export default function ProjectsSection({ onSelectProject }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6"
+          className="rounded-3xl border border-emerald-900/10 bg-white p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center sm:text-left w-full md:w-auto">
             <div>
-              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-black text-amber-400">13</div>
-              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-400 font-medium">Sovereign Repos</div>
+              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-emerald-800">13</div>
+              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-medium">Sovereign Repos</div>
             </div>
             <div>
-              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-black text-white">246</div>
-              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-400 font-medium">Synced Nodes</div>
+              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-sky-800">246</div>
+              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-medium">Synced Nodes</div>
             </div>
             <div>
-              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-black text-amber-400">&lt;10ms</div>
-              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-400 font-medium">MCP Tool Dispatch</div>
+              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-orange-700">&lt;10ms</div>
+              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-medium">MCP Tool Dispatch</div>
             </div>
             <div>
-              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-black text-white">100%</div>
-              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-400 font-medium">Idempotent</div>
+              <div className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-slate-800">100%</div>
+              <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-medium">Idempotent</div>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <a
-              href="/Akash_Jadon_CV.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-fable-midnight px-5 py-3 font-cinzel font-bold text-xs text-amber-300 transition-all hover:scale-105"
-            >
-              <FileDown className="w-4 h-4" />
-              <span>Download Resume (CV)</span>
-            </a>
-
+          <div className="flex items-center gap-4 w-full md:w-auto">
             <a
               href="https://github.com/akashjadon04"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-6 py-3 font-cinzel font-bold text-xs text-fable-midnight shadow-lg shadow-amber-500/20 transition-all hover:scale-105"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-emerald-800 hover:bg-emerald-900 px-6 py-3 font-cinzel font-bold text-xs text-white shadow-sm transition-all hover:scale-105"
             >
-              <span>Explore GitHub Organizations</span>
-              <Sparkles className="w-3.5 h-3.5" />
+              <span>Explore GitHub Repositories</span>
+              <ArrowRight className="w-3.5 h-3.5 text-emerald-200" />
             </a>
           </div>
         </motion.div>
       </div>
-
-      {/* Fallback Modal */}
-      <ProjectModal
-        project={modalProject}
-        onClose={() => setModalProject(null)}
-      />
     </section>
   );
 }

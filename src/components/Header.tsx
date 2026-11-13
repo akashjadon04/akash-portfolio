@@ -5,11 +5,10 @@ import {
   Mail,
   Menu,
   X,
-  Sparkles,
   ArrowLeft,
-  Terminal,
   ExternalLink,
 } from "lucide-react";
+import { NatureZenLeaf } from "./NatureGraphics";
 import type { Project } from "../data/projectsData";
 
 type Props = {
@@ -23,7 +22,7 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,8 +35,8 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
       <div
         className={`pointer-events-auto flex items-center justify-between gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${
           scrolled
-            ? "border-amber-400/30 bg-[#0d051c]/90 shadow-[0_15px_35px_-5px_rgba(0,0,0,0.8),0_0_20px_rgba(251,191,36,0.15)] backdrop-blur-xl"
-            : "border-white/10 bg-[#0d051c]/75 shadow-xl backdrop-blur-md"
+            ? "border-emerald-900/15 bg-white/95 shadow-md shadow-emerald-950/5 backdrop-blur-xl"
+            : "border-emerald-900/10 bg-white/85 shadow-sm backdrop-blur-md"
         }`}
       >
         {/* Left: Brand / Identity OR Back Button */}
@@ -45,39 +44,32 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
           {activeProject ? (
             <button
               onClick={onBackToCatalog}
-              className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-fable-midnight px-3 py-1.5 text-xs font-cinzel font-bold text-amber-300 transition-all shadow-md group"
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-700 hover:text-white px-3.5 py-1.5 text-xs font-cinzel font-bold text-emerald-900 transition-all shadow-sm group"
             >
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
               <span>Back to Systems</span>
             </button>
           ) : (
-            <a
-              href="#"
-              className="flex items-center gap-2.5 group"
-            >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-700 via-amber-400 to-amber-200 p-[1.5px] shadow-md group-hover:scale-105 transition-transform">
-                <div className="w-full h-full rounded-full bg-[#0d051c] flex items-center justify-center">
-                  <span className="font-cinzel font-black text-xs text-amber-300 tracking-wider">
-                    AJ
-                  </span>
-                </div>
+            <a href="#" className="flex items-center gap-2.5 group">
+              <div className="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                <NatureZenLeaf className="w-4 h-4 text-emerald-200" />
               </div>
 
               <div className="flex flex-col">
-                <span className="font-cinzel text-xs sm:text-sm font-black tracking-widest text-white group-hover:text-amber-300 transition-colors">
+                <span className="font-cinzel text-xs sm:text-sm font-black tracking-widest text-slate-900 group-hover:text-emerald-800 transition-colors">
                   AKASH JADON
                 </span>
-                <span className="hidden sm:inline-block text-[9px] font-mono tracking-widest text-amber-400/90 font-semibold uppercase">
+                <span className="hidden sm:inline-block text-[9px] font-mono tracking-widest text-emerald-800 font-semibold uppercase">
                   EVOLNEX.DIGITAL
                 </span>
               </div>
             </a>
           )}
 
-          {/* Evolnex Digital Live Chip */}
+          {/* Lead Architect Live Chip */}
           {!activeProject && (
-            <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-950/40 px-2.5 py-0.5 text-[10px] font-mono text-emerald-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-2.5 py-0.5 text-[10px] font-mono text-emerald-800">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
               <span>LEAD ARCHITECT</span>
             </div>
           )}
@@ -88,91 +80,70 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
           <nav className="hidden md:flex items-center gap-5 lg:gap-7 text-xs font-cinzel font-bold tracking-wider">
             <a
               href="#systems"
-              className="text-stone-300 hover:text-amber-300 transition-colors py-1 relative hover:scale-105 duration-200"
+              className="text-slate-600 hover:text-emerald-800 transition-colors py-1 relative hover:scale-105 duration-200"
             >
               Architecture
             </a>
             <a
               href="#showcase"
-              className="text-stone-300 hover:text-amber-300 transition-colors py-1 relative hover:scale-105 duration-200"
+              className="text-slate-600 hover:text-emerald-800 transition-colors py-1 relative hover:scale-105 duration-200"
             >
-              Ecosystem
+              Flagships
             </a>
             <a
               href="#projects"
-              className="text-stone-300 hover:text-amber-300 transition-colors py-1 relative hover:scale-105 duration-200"
+              className="text-slate-600 hover:text-emerald-800 transition-colors py-1 relative hover:scale-105 duration-200"
             >
-              Sovereign Systems
-            </a>
-            <a
-              href="#astra-ai"
-              className="text-stone-300 hover:text-amber-300 transition-colors py-1 relative hover:scale-105 duration-200"
-            >
-              Flagship
+              All Systems
             </a>
             <a
               href="#closing"
-              className="text-stone-300 hover:text-amber-300 transition-colors py-1 relative hover:scale-105 duration-200"
+              className="text-slate-600 hover:text-emerald-800 transition-colors py-1 relative hover:scale-105 duration-200"
             >
               Contact
             </a>
           </nav>
         )}
 
-        {/* Right: Actions (Resume, Socials, Mobile Toggle) */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          {/* Prominent Resume (CV) Button */}
+        {/* Right: Actions (Resume + GitHub + Mobile Toggle) */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Resume Download / View Button */}
           <a
             href="/Akash_Jadon_CV.pdf"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-fable-midnight px-3.5 sm:px-4 py-1.5 text-xs font-cinzel font-black shadow-md shadow-amber-500/20 transition-all hover:scale-105"
-            title="Open or Download Akash Jadon's verified CV"
+            className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200/80 px-3.5 py-1.5 text-xs font-cinzel font-bold tracking-wider shadow-sm transition-all hover:scale-105"
+            title="Download Akash Jadon Resume (PDF)"
           >
-            <FileDown className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span className="hidden xs:inline">Resume</span>
-            <span className="xs:hidden">CV</span>
+            <FileDown className="w-3.5 h-3.5 text-sky-700" />
+            <span className="hidden sm:inline">Resume</span>
+            <span className="sm:hidden">CV</span>
           </a>
 
-          {/* GitHub Icon Link */}
+          {/* GitHub Profile Icon */}
           <a
             href="https://github.com/akashjadon04"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-stone-300 hover:text-white transition-all hover:scale-105"
-            aria-label="GitHub Profile"
+            className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-emerald-50 hover:text-emerald-800 text-slate-700 transition shadow-sm"
+            title="GitHub: @akashjadon04"
           >
-            <GitBranch className="w-4 h-4 text-amber-300" />
+            <GitBranch className="w-4 h-4" />
           </a>
 
-          {/* LinkedIn Icon Link */}
+          {/* Contact Dispatch Button */}
           <a
-            href="https://www.linkedin.com/in/akashjadon/"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-stone-300 hover:text-white transition-all hover:scale-105"
-            aria-label="LinkedIn Profile"
+            href="#closing"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white px-4 py-1.5 text-xs font-cinzel font-bold tracking-wider shadow-sm transition hover:scale-105"
           >
-            <svg className="w-4 h-4 fill-amber-300" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.55a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
-            </svg>
+            <Mail className="w-3.5 h-3.5" />
+            <span>Contact</span>
           </a>
 
-          {/* Direct Contact Button */}
-          {!activeProject && (
-            <a
-              href="#closing"
-              className="hidden lg:inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-3.5 py-1.5 text-xs font-cinzel font-bold transition-all hover:border-amber-400/50"
-            >
-              <Mail className="w-3.5 h-3.5 text-amber-400" />
-              <span>Contact</span>
-            </a>
-          )}
-
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-white/10 bg-white/5 text-stone-300 hover:text-white transition"
+            className="inline-flex md:hidden items-center justify-center w-8 h-8 rounded-full border border-slate-200 bg-white text-slate-800 hover:bg-emerald-50 transition"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -180,93 +151,63 @@ export default function Header({ activeProject, onBackToCatalog }: Props) {
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="pointer-events-auto md:hidden mt-2 rounded-3xl border border-amber-400/30 bg-[#0e061c]/95 backdrop-blur-2xl shadow-2xl p-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex flex-col">
-              <span className="font-cinzel text-sm font-bold text-white">AKASH JADON</span>
-              <span className="text-[10px] font-mono text-amber-400">EVOLNEX DIGITAL</span>
-            </div>
-            <span className="rounded-full bg-emerald-950/60 border border-emerald-400/30 px-2 py-0.5 text-[9px] font-mono text-emerald-300">
-              Lead Architect
-            </span>
-          </div>
-
-          <nav className="flex flex-col space-y-3 font-cinzel text-sm font-bold">
+        <div className="pointer-events-auto md:hidden mt-2 p-5 rounded-3xl border border-emerald-900/15 bg-white/95 shadow-xl backdrop-blur-2xl animate-in slide-in-from-top-4 duration-300">
+          <nav className="flex flex-col gap-3 font-cinzel font-bold text-sm text-slate-800">
             <a
               href="#systems"
               onClick={closeMenu}
-              className="text-stone-300 hover:text-amber-300 transition py-1"
+              className="py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-900 transition"
             >
-              System Architecture
+              Architecture
             </a>
             <a
               href="#showcase"
               onClick={closeMenu}
-              className="text-stone-300 hover:text-amber-300 transition py-1"
+              className="py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-900 transition"
             >
-              Flagship Ecosystem
+              Flagships
             </a>
             <a
               href="#projects"
               onClick={closeMenu}
-              className="text-stone-300 hover:text-amber-300 transition py-1"
+              className="py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-900 transition"
             >
-              13 Sovereign Systems
-            </a>
-            <a
-              href="#astra-ai"
-              onClick={closeMenu}
-              className="text-stone-300 hover:text-amber-300 transition py-1"
-            >
-              Astra AI Flagship
+              Sovereign Systems
             </a>
             <a
               href="#closing"
               onClick={closeMenu}
-              className="text-stone-300 hover:text-amber-300 transition py-1"
+              className="py-2 px-3 rounded-xl hover:bg-emerald-50 hover:text-emerald-900 transition"
             >
-              Contact Architect
-            </a>
-          </nav>
-
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
-            <a
-              href="/Akash_Jadon_CV.pdf"
-              target="_blank"
-              rel="noreferrer"
-              onClick={closeMenu}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 py-2.5 font-cinzel font-bold text-xs text-fable-midnight shadow-md shadow-amber-500/20"
-            >
-              <FileDown className="w-4 h-4" />
-              <span>Download Full Resume (CV)</span>
+              Contact
             </a>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="pt-3 border-t border-slate-200 flex flex-col gap-2">
+              <a
+                href="/Akash_Jadon_CV.pdf"
+                target="_blank"
+                rel="noreferrer"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-2 rounded-xl bg-sky-50 text-sky-900 border border-sky-200 py-2.5 text-xs font-bold"
+              >
+                <FileDown className="w-4 h-4 text-sky-700" />
+                <span>View Resume (PDF)</span>
+              </a>
+
               <a
                 href="https://github.com/akashjadon04"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 py-2 text-xs font-cinzel text-stone-300 hover:text-white"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 py-2.5 text-xs font-bold text-slate-700"
               >
-                <GitBranch className="w-3.5 h-3.5 text-amber-400" />
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/akashjadon/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 py-2 text-xs font-cinzel text-stone-300 hover:text-white"
-              >
-                <svg className="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.55a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z" />
-                </svg>
-                <span>LinkedIn</span>
+                <GitBranch className="w-4 h-4" />
+                <span>GitHub: @akashjadon04</span>
               </a>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </header>

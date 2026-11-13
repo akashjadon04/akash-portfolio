@@ -5,13 +5,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Lock, Sparkles, GitBranch, Linkedin, Mail } from "lucide-react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import CinematicSection from "./components/CinematicSection";
 import SystemsShowcase from "./components/SystemsShowcase";
 import ProjectsSection from "./components/ProjectsSection";
 import ProjectDetailPage from "./components/ProjectDetailPage";
 import AstraAIPage from "./components/AstraAIPage";
 import ClosingPage from "./components/ClosingPage";
-import Particles from "./components/Particles";
+import { NatureZenLeaf } from "./components/NatureGraphics";
 import { sovereignProjects, type Project } from "./data/projectsData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -43,28 +42,23 @@ export default function App() {
     return null;
   }, []);
 
-  // Initialize URL routing & handle browser Back/Forward (popstate)
   useEffect(() => {
     setMounted(true);
 
+    // Initial check for deep-link project URL
     const initialProject = getProjectFromUrl();
     if (initialProject) {
       setCurrentProject(initialProject);
     }
 
+    // Handle browser back/forward buttons
     const handlePopState = () => {
-      const project = getProjectFromUrl();
-      setCurrentProject(project);
+      const proj = getProjectFromUrl();
+      setCurrentProject(proj);
     };
-
     window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [getProjectFromUrl]);
 
-  // Lenis Smooth Scroll Setup for main catalog
-  useEffect(() => {
-    if (currentProject) return;
-
+    // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       smoothWheel: true,
     });
@@ -79,22 +73,22 @@ export default function App() {
     gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
+      window.removeEventListener("popstate", handlePopState);
       gsap.ticker.remove(handleRaf);
       lenis.destroy();
     };
-  }, [currentProject]);
+  }, [getProjectFromUrl]);
 
-  // Open dedicated project deep dive page
+  // Navigate to dedicated project page
   const handleSelectProject = (project: Project) => {
     setCurrentProject(project);
     const url = new URL(window.location.href);
     url.searchParams.set("project", project.id);
-    url.hash = "";
-    window.history.pushState({ projectId: project.id }, "", url.toString());
+    window.history.pushState(null, "", url.toString());
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Return from project page back to systems catalog
+  // Return back to main catalog
   const handleBackToCatalog = () => {
     setCurrentProject(null);
     const url = new URL(window.location.href);
@@ -113,9 +107,7 @@ export default function App() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#070211]">
-      <Particles />
-
+    <div className="relative min-h-screen overflow-x-hidden bg-[#fbfdfa] text-slate-900 selection:bg-emerald-200 selection:text-emerald-950">
       {/* Floating Glassmorphic Header */}
       <Header
         activeProject={currentProject}
@@ -131,46 +123,38 @@ export default function App() {
         />
       ) : (
         <main className="relative z-10">
-          {/* 1. ATTENTION-COMMANDING HERO SECTION */}
-          <section className="relative w-full overflow-hidden bg-fable-midnight">
+          {/* 1. MINIMALIST LIGHT NATURE HERO SECTION */}
+          <section id="hero" className="relative w-full overflow-hidden bg-[#fbfdfa]">
             <Hero />
           </section>
 
-          {/* 2. CINEMATIC 3D SYSTEMS ARCHITECT EXPERIENCE */}
-          <section className="relative w-full overflow-hidden bg-fable-midnight">
-            <CinematicSection />
-          </section>
-
-          {/* 3. 3D ATROPOS LIVE ECOSYSTEM SHOWCASE */}
-          <section className="relative w-full overflow-hidden">
+          {/* 2. 3D ATROPOS LIVE ECOSYSTEM SHOWCASE */}
+          <section id="systems" className="relative w-full overflow-hidden">
             <SystemsShowcase onSelectProject={handleSelectProject} />
           </section>
 
-          {/* 4. COMPLETE 13 SOVEREIGN SYSTEMS CATALOG */}
+          {/* 3. COMPLETE 13 SOVEREIGN SYSTEMS CATALOG */}
           <ProjectsSection onSelectProject={handleSelectProject} />
 
-          {/* 5. ASTRA AI FLAGSHIP DEEP DIVE */}
+          {/* 4. ASTRA AI FLAGSHIP DEEP DIVE */}
           <section
             id="astra-ai"
-            className="page section-dark flex min-h-screen flex-col justify-center px-4 py-16 sm:px-6 md:px-12"
+            className="relative w-full bg-[#fbfdfa] py-20 sm:py-28 px-4 sm:px-6 md:px-12"
           >
             <AstraAIPage />
           </section>
 
-          {/* 6. CLOSING CREDENTIALS & DIRECT DISPATCH */}
-          <section
-            id="closing"
-            className="page section-parchment parchment flex min-h-screen flex-col justify-center px-4 py-16 sm:px-6 md:px-12"
-          >
+          {/* 5. CLOSING CREDENTIALS & DIRECT DISPATCH */}
+          <section id="closing" className="relative w-full">
             <ClosingPage />
           </section>
         </main>
       )}
 
       {/* Sovereign Verified Badge */}
-      <div className="fixed bottom-4 left-4 z-40 hidden items-center gap-2 rounded-full border border-amber-400/30 bg-black/75 px-3.5 py-1.5 text-xs text-white/90 backdrop-blur-md no-print md:flex shadow-2xl">
-        <Lock className="h-3.5 w-3.5 text-amber-400" />
-        <span className="font-cinzel tracking-wider text-[11px] font-bold text-amber-200">
+      <div className="fixed bottom-4 left-4 z-40 hidden items-center gap-2 rounded-full border border-emerald-600/20 bg-white/90 px-3.5 py-1.5 text-xs text-slate-800 backdrop-blur-md no-print md:flex shadow-sm">
+        <NatureZenLeaf className="h-3.5 w-3.5 text-emerald-700" />
+        <span className="font-cinzel tracking-wider text-[11px] font-bold text-emerald-950">
           Staff / Lead Architect · Evolnex Digital
         </span>
       </div>

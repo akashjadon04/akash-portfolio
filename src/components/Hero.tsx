@@ -1,261 +1,146 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  FileDown,
-  ArrowRight,
-  Sparkles,
-  Server,
-  Zap,
-  Cpu,
-  Layers,
-  ChevronDown,
-  Radio,
-  ExternalLink,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, FileDown, ArrowDown, Sparkles } from "lucide-react";
+import { NatureTopography, NatureZenLeaf, NatureSunHorizon, NatureOrganicBranch } from "./NatureGraphics";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const layers = containerRef.current?.querySelector("[data-parallax-layers]");
-      if (!layers) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "0% 0%",
-          end: "100% 0%",
-          scrub: 0.5,
-        },
-      });
-
-      [
-        { layer: "1", yPercent: 40 },
-        { layer: "2", yPercent: 25 },
-        { layer: "3", yPercent: 10 },
-      ].forEach((config, idx) => {
-        tl.to(
-          layers.querySelectorAll(`[data-parallax-layer="${config.layer}"]`),
-          { yPercent: config.yPercent, ease: "none", force3D: true },
-          idx === 0 ? undefined : "<"
-        );
-      });
-
-      // Gentle fade & drift out of hero foreground content on deep scroll
-      if (contentRef.current) {
-        tl.to(
-          contentRef.current,
-          {
-            y: -100,
-            opacity: 0.2,
-            ease: "power1.in",
-            force3D: true,
-          },
-          0
-        );
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-fable-midnight" ref={containerRef}>
-      {/* Background Parallax Depth Canvas */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div data-parallax-layers className="relative w-full h-full">
-          {/* Layer 1: Sky & Atmosphere */}
-          <img
-            src="/images/parallax/layer-sky.webp"
-            loading="eager"
-            data-parallax-layer="1"
-            alt=""
-            className="absolute inset-0 w-full h-[125%] -top-[20%] object-cover opacity-60 pointer-events-none"
-          />
+    <div className="relative w-full min-h-[92vh] flex flex-col justify-center items-center overflow-hidden bg-[#fbfdfa] text-slate-900 pt-28 pb-16 sm:pt-36 sm:pb-20">
+      {/* 1. Subtle Calming Ambient Glows (Sage Green, Light Sky Blue, Soft Sunrise Orange) */}
+      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-sky-100/50 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-orange-100/30 rounded-full blur-[120px] pointer-events-none" />
 
-          {/* Layer 2: Mountain Ridge Silhouette */}
-          <img
-            src="/images/parallax/layer-mountains.webp"
-            loading="eager"
-            data-parallax-layer="2"
-            alt=""
-            className="absolute inset-0 w-full h-[120%] -top-[10%] object-cover opacity-50 pointer-events-none"
-          />
+      {/* 2. Minimalist Topographic Contour Lines */}
+      <NatureTopography className="opacity-40" />
 
-          {/* Layer 3: Foreground Atmospheric Silhouette */}
-          <img
-            src="/images/parallax/layer-foreground.webp"
-            loading="eager"
-            data-parallax-layer="3"
-            alt=""
-            className="absolute inset-0 w-full h-[115%] -top-[5%] object-cover opacity-40 pointer-events-none"
-          />
-        </div>
+      {/* 3. Zen Sun Horizon Arc (Centered Behind Headline) */}
+      <NatureSunHorizon className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px]" />
 
-        {/* Cinematic Vignette & Radial Glow */}
-        <div className="absolute inset-0 bg-radial from-transparent via-[#0f041e]/70 to-[#070110] pointer-events-none" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-purple-700/20 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-1/3 w-[500px] h-[300px] bg-amber-500/15 rounded-full blur-[120px] pointer-events-none" />
+      {/* 4. Elegant Minimalist Botanical Branch Graphic on the side */}
+      <div className="hidden lg:block absolute left-8 xl:left-16 bottom-16 opacity-60 pointer-events-none">
+        <NatureOrganicBranch className="w-24 h-36" />
+      </div>
+      <div className="hidden lg:block absolute right-8 xl:right-16 top-32 opacity-40 pointer-events-none scale-x-[-1]">
+        <NatureOrganicBranch className="w-20 h-32" />
       </div>
 
-      {/* Foreground Attention-Commanding Hero Content */}
-      <div
-        ref={contentRef}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-20 sm:pb-24 min-h-screen flex flex-col justify-center items-center text-center will-change-transform"
-      >
-        {/* Top Status & Role Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-[#16072b]/80 backdrop-blur-xl px-4 py-1.5 text-xs font-semibold text-amber-300 mb-6 sm:mb-8 shadow-xl shadow-amber-500/10 animate-in fade-in duration-700">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)] animate-pulse" />
-          <span className="font-cinzel tracking-wider text-[11px] sm:text-xs font-bold text-amber-200">
-            LEAD SYSTEMS, FULL-STACK & AGENTIC AI ARCHITECT
+      {/* 5. Minimalist Centered Hero Content */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+        {/* Calming Role Pill */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50/80 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-emerald-900 mb-6 shadow-sm"
+        >
+          <NatureZenLeaf className="w-3.5 h-3.5 text-emerald-700" />
+          <span className="font-cinzel tracking-wider text-[11px] sm:text-xs font-bold">
+            AKASH JADON · LEAD SYSTEMS ARCHITECT
           </span>
-          <span className="text-amber-400/50">·</span>
-          <span className="font-mono text-[10px] text-amber-400 font-bold tracking-wider">
+          <span className="text-emerald-400">·</span>
+          <span className="font-mono text-[10px] text-emerald-700 font-bold uppercase tracking-wider">
             EVOLNEX.DIGITAL
           </span>
-        </div>
+        </motion.div>
 
-        {/* Master Headline */}
-        <h1 className="font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-[1.05] max-w-5xl mb-6">
-          Architecting Sovereign Backends,{" "}
-          <span className="gold-text block sm:inline">
-            Distributed Runtimes & Autonomous AI.
+        {/* Striking Minimalist Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="font-cinzel text-4xl sm:text-6xl md:text-7xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6"
+        >
+          Sovereign Systems{" "}
+          <span className="block mt-1 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-sky-700 to-orange-600">
+            & Living Code.
           </span>
-        </h1>
+        </motion.h1>
 
-        {/* High-Impact Value Proposition / Positioning Statement */}
-        <p className="font-inter text-base sm:text-lg md:text-xl text-stone-200/90 leading-relaxed max-w-3xl mb-8 sm:mb-10 font-normal">
-          Engineering high-concurrency event telemetry, 246-node distributed state synchronization, multi-threaded JVM agent harnesses with 100+ Model Context Protocol (MCP) tools, and commercial Swiss fintech platforms with mathematical idempotency and zero tolerance for failure.
-        </p>
+        {/* Refined 2-Line Narrative Statement */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-inter text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-10 font-normal"
+        >
+          Designing 246-node bi-directional state synchronization engines, multi-threaded JVM agent harnesses with 100+ MCP tools, and sovereign full-stack cloud software with calm mathematical precision.
+        </motion.p>
 
-        {/* Live KPI Stat Chips */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-4xl mb-10 sm:mb-12">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl text-center shadow-lg transition-transform hover:scale-105 hover:border-amber-400/40">
-            <div className="font-cinzel text-2xl sm:text-3xl font-black text-amber-400">13</div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-stone-300 font-bold mt-1 font-cinzel">
-              Sovereign Systems
-            </div>
-            <div className="text-[9px] sm:text-[10px] text-stone-400 font-inter mt-0.5">
-              Production Repos
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl text-center shadow-lg transition-transform hover:scale-105 hover:border-amber-400/40">
-            <div className="font-cinzel text-2xl sm:text-3xl font-black text-white">246</div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-stone-300 font-bold mt-1 font-cinzel">
-              Synced Nodes
-            </div>
-            <div className="text-[9px] sm:text-[10px] text-stone-400 font-inter mt-0.5">
-              Redis Mutex Mesh
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl text-center shadow-lg transition-transform hover:scale-105 hover:border-amber-400/40">
-            <div className="font-cinzel text-2xl sm:text-3xl font-black text-amber-400">&lt;10ms</div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-stone-300 font-bold mt-1 font-cinzel">
-              MCP Tool Dispatch
-            </div>
-            <div className="text-[9px] sm:text-[10px] text-stone-400 font-inter mt-0.5">
-              JVM Virtual Threads
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-xl text-center shadow-lg transition-transform hover:scale-105 hover:border-amber-400/40">
-            <div className="font-cinzel text-2xl sm:text-3xl font-black text-white">CHF 2.4M+</div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-stone-300 font-bold mt-1 font-cinzel">
-              Quotes Processed
-            </div>
-            <div className="text-[9px] sm:text-[10px] text-stone-400 font-inter mt-0.5">
-              Swiss VAT SaaS
-            </div>
-          </div>
-        </div>
-
-        {/* Primary Action Button Cluster */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12">
-          {/* Explore Sovereign Systems */}
+        {/* Minimalist Action Pill Cluster */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-14"
+        >
+          {/* Primary CTA: Explore Systems */}
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-7 py-3.5 font-cinzel font-black text-xs sm:text-sm text-fable-midnight shadow-xl shadow-amber-500/25 transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white px-7 py-3.5 font-cinzel font-bold text-xs sm:text-sm tracking-wider shadow-md shadow-emerald-900/15 transition-all hover:scale-105"
           >
-            <span>Explore Sovereign Systems</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Explore Systems</span>
+            <ArrowRight className="w-4 h-4 text-emerald-200" />
           </a>
 
-          {/* View / Download Resume (CV) */}
+          {/* Secondary CTA: Download Resume (CV) */}
           <a
             href="/Akash_Jadon_CV.pdf"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400 hover:text-fable-midnight px-6 py-3.5 font-cinzel font-bold text-xs sm:text-sm text-amber-300 transition-all hover:scale-105 shadow-lg"
+            className="inline-flex items-center gap-2 rounded-full border border-sky-300 bg-sky-50/70 hover:bg-sky-100/90 text-sky-900 px-6 py-3.5 font-cinzel font-bold text-xs sm:text-sm tracking-wider shadow-sm transition-all hover:scale-105"
           >
-            <FileDown className="w-4 h-4" />
+            <FileDown className="w-4 h-4 text-sky-700" />
             <span>Download Resume (CV)</span>
           </a>
 
-          {/* Inspect Architecture */}
-          <a
-            href="#systems"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-6 py-3.5 font-cinzel font-semibold text-xs sm:text-sm text-white transition-all hover:border-white/30"
-          >
-            <Cpu className="w-4 h-4 text-amber-400" />
-            <span>Inspect Architecture</span>
-          </a>
-
-          {/* Contact Architect */}
+          {/* Tertiary CTA: Contact */}
           <a
             href="#closing"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-6 py-3.5 font-cinzel font-semibold text-xs sm:text-sm text-stone-300 hover:text-white transition-all hover:border-white/30"
+            className="inline-flex items-center gap-1.5 rounded-full border border-orange-300/60 bg-orange-50/50 hover:bg-orange-100/80 text-orange-950 px-6 py-3.5 font-cinzel font-bold text-xs sm:text-sm tracking-wider transition-all hover:scale-105"
           >
-            <span>Contact Lead Architect</span>
+            <span>Get in Touch</span>
           </a>
-        </div>
+        </motion.div>
 
-        {/* Core Architectural Stack Ticker */}
-        <div className="w-full max-w-4xl pt-6 border-t border-white/10">
-          <div className="text-[10px] font-cinzel uppercase tracking-[0.2em] text-stone-400 mb-3 font-bold">
-            Core Production Architecture & Runtime Fabric
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-            {[
-              "Java 21 Virtual Threads",
-              "Model Context Protocol (MCP)",
-              "Next.js 15 App Router",
-              "FastAPI Asynchronous Gateway",
-              "Distributed Redis Mutex (SETNX)",
-              "PostgreSQL Row-Level Security",
-              "Columnar ClickHouse & Parquet",
-              "Go 1.22 Fiber",
-              "LangGraph Agent DAGs",
-              "WebContainers Sandbox",
-            ].map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-stone-300 hover:text-amber-300 hover:border-amber-400/40 transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <a
-          href="#systems"
-          className="mt-12 inline-flex flex-col items-center gap-1.5 text-stone-400 hover:text-amber-300 transition-colors group"
-          aria-label="Scroll down to inspect systems architecture"
+        {/* Minimalist Stat Whispers (Clean single line with breathing room) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-500 font-inter py-3 px-6 rounded-full bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm"
         >
-          <span className="text-[10px] font-cinzel uppercase tracking-widest font-semibold">
-            Scroll to Inspect Architecture
-          </span>
-          <ChevronDown className="w-4 h-4 animate-bounce text-amber-400" />
-        </a>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span className="font-semibold text-slate-800">246 Synced Nodes</span>
+            <span className="text-slate-400 font-mono text-[11px]">(TandemFlow)</span>
+          </div>
+
+          <span className="hidden sm:inline text-slate-300">·</span>
+
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-sky-500" />
+            <span className="font-semibold text-slate-800">100+ MCP Tools</span>
+            <span className="text-slate-400 font-mono text-[11px]">(BossConsole)</span>
+          </div>
+
+          <span className="hidden sm:inline text-slate-300">·</span>
+
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-orange-500" />
+            <span className="font-semibold text-slate-800">CHF 2.4M+ Processed</span>
+            <span className="text-slate-400 font-mono text-[11px]">(Swiss VAT SaaS)</span>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Subtle Scroll Hint */}
+      <a
+        href="#systems"
+        className="mt-10 inline-flex items-center gap-1.5 text-[11px] font-cinzel tracking-widest text-slate-400 hover:text-emerald-800 transition-colors"
+      >
+        <span>SCROLL TO EXPLORE</span>
+        <ArrowDown className="w-3.5 h-3.5 text-emerald-600 animate-bounce" />
+      </a>
     </div>
   );
 }
