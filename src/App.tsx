@@ -2,15 +2,15 @@ import { useState, useEffect, useCallback } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Lock, Sparkles, GitBranch, Linkedin, Mail } from "lucide-react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import CinematicSection from "./components/CinematicSection";
 import SystemsShowcase from "./components/SystemsShowcase";
 import ProjectsSection from "./components/ProjectsSection";
 import ProjectDetailPage from "./components/ProjectDetailPage";
 import AstraAIPage from "./components/AstraAIPage";
 import ClosingPage from "./components/ClosingPage";
-import { NatureZenLeaf } from "./components/NatureGraphics";
+import { NatureZenLeaf, LivingBranchConnector } from "./components/NatureGraphics";
 import { sovereignProjects, type Project } from "./data/projectsData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -88,6 +88,16 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleSelectProjectById = (projectId: string) => {
+    const found = sovereignProjects.find((p) => p.id === projectId);
+    if (found) {
+      handleSelectProject(found);
+    } else {
+      const el = document.getElementById("projects");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Return back to main catalog
   const handleBackToCatalog = () => {
     setCurrentProject(null);
@@ -125,18 +135,45 @@ export default function App() {
         <main className="relative z-10">
           {/* 1. MINIMALIST LIGHT NATURE HERO SECTION */}
           <section id="hero" className="relative w-full overflow-hidden bg-[#fbfdfa]">
-            <Hero />
+            <Hero onSelectProject={handleSelectProjectById} />
           </section>
 
-          {/* 2. 3D ATROPOS LIVE ECOSYSTEM SHOWCASE */}
-          <section id="systems" className="relative w-full overflow-hidden">
+          {/* LIVING BOTANICAL VINE CONNECTOR: HERO -> SECTION 2 */}
+          <div className="relative w-full z-20 pointer-events-none -my-10 sm:-my-16">
+            <LivingBranchConnector className="h-28 sm:h-36" />
+          </div>
+
+          {/* 2. REINSTATED GSAP PINNED 3D HARDWARE SECTION (LIGHT NATURE CERAMIC EDITION) */}
+          <section id="cinematic" className="relative w-full overflow-hidden">
+            <CinematicSection />
+          </section>
+
+          {/* LIVING BOTANICAL VINE CONNECTOR: SECTION 2 -> SECTION 3 */}
+          <div className="relative w-full z-20 pointer-events-none -my-10 sm:-my-16">
+            <LivingBranchConnector className="h-28 sm:h-36" />
+          </div>
+
+          {/* 3. 3D ATROPOS LIVE ECOSYSTEM SHOWCASE */}
+          <section id="systems" className="relative w-full overflow-hidden bg-[#fbfdfa]">
             <SystemsShowcase onSelectProject={handleSelectProject} />
           </section>
 
-          {/* 3. COMPLETE 13 SOVEREIGN SYSTEMS CATALOG */}
-          <ProjectsSection onSelectProject={handleSelectProject} />
+          {/* LIVING BOTANICAL VINE CONNECTOR: SECTION 3 -> SECTION 4 */}
+          <div className="relative w-full z-20 pointer-events-none -my-8 sm:-my-12">
+            <LivingBranchConnector className="h-24 sm:h-32" />
+          </div>
 
-          {/* 4. ASTRA AI FLAGSHIP DEEP DIVE */}
+          {/* 4. COMPLETE 13 SOVEREIGN SYSTEMS CATALOG */}
+          <section id="projects" className="relative w-full bg-[#f4f7f4]">
+            <ProjectsSection onSelectProject={handleSelectProject} />
+          </section>
+
+          {/* LIVING BOTANICAL VINE CONNECTOR: SECTION 4 -> SECTION 5 */}
+          <div className="relative w-full z-20 pointer-events-none -my-8 sm:-my-12">
+            <LivingBranchConnector className="h-24 sm:h-32" />
+          </div>
+
+          {/* 5. ASTRA AI FLAGSHIP DEEP DIVE */}
           <section
             id="astra-ai"
             className="relative w-full bg-[#fbfdfa] py-20 sm:py-28 px-4 sm:px-6 md:px-12"
@@ -144,8 +181,8 @@ export default function App() {
             <AstraAIPage />
           </section>
 
-          {/* 5. CLOSING CREDENTIALS & DIRECT DISPATCH */}
-          <section id="closing" className="relative w-full">
+          {/* 6. CLOSING CREDENTIALS & DIRECT DISPATCH */}
+          <section id="closing" className="relative w-full bg-[#f4f7f4]">
             <ClosingPage />
           </section>
         </main>

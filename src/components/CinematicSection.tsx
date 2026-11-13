@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Sparkles, Bot, Network, FileText, ArrowRight, Mail } from "lucide-react";
+import { NatureTopography, NatureZenLeaf } from "./NatureGraphics";
 
 export default function CinematicSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -120,7 +121,7 @@ export default function CinematicSection() {
           "-=0.8"
         );
 
-      // Pinned Scroll Timeline: Smooth entrance & phone reveal, then FAST exit after phone renders
+      // Pinned Scroll Timeline: Smooth entrance & phone reveal, then crisp transition
       gsap
         .timeline({
           scrollTrigger: {
@@ -132,9 +133,9 @@ export default function CinematicSection() {
             anticipatePin: 1,
           },
         })
-        // Phase 1: Smooth, steady entrance of card & text
+        // Phase 1: Smooth entrance of ceramic card & text
         .to(
-          [".cinematic-hero-text", ".bg-grid-theme"],
+          [".cinematic-hero-text", ".bg-nature-ambient"],
           {
             scale: 1.1,
             opacity: 0.1,
@@ -162,7 +163,7 @@ export default function CinematicSection() {
           duration: 1.5,
           force3D: true,
         })
-        // Phase 2: iPhone mockup & live telemetry widgets smoothly appear
+        // Phase 2: Ceramic hardware mockup & live telemetry widgets smoothly appear
         .fromTo(
           ".cinematic-mockup-wrapper",
           { y: 180, z: -300, rotationX: 30, rotationY: -18, autoAlpha: 0, scale: 0.8 },
@@ -235,7 +236,7 @@ export default function CinematicSection() {
           { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5, force3D: true },
           "<"
         )
-        // Phase 3: FAST transition right after mockup and data is shown!
+        // Phase 3: Transition to pullback stage
         .to({}, { duration: 0.4 })
         .set(".cinematic-hero-text", { autoAlpha: 0 })
         .set(".cinematic-cta-wrapper", { autoAlpha: 1 })
@@ -288,20 +289,29 @@ export default function CinematicSection() {
 
   return (
     <div
-      id="systems"
+      id="cinematic"
       ref={sectionRef}
-      className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-fable-midnight text-white font-sans antialiased"
+      className="relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#f4f7f4] text-slate-900 font-sans antialiased"
       style={{ perspective: "1500px" }}
     >
-      <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-40" aria-hidden="true" />
+      {/* Subtle Calming Nature Glows */}
+      <div className="bg-nature-ambient absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-[140px] pointer-events-none" />
+      <div className="bg-nature-ambient absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-sky-100/40 rounded-full blur-[140px] pointer-events-none" />
+      <NatureTopography className="opacity-25" />
 
       {/* Stage 1: Entrance Headline */}
       <div className="cinematic-hero-text absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform">
-        <h2 className="cinematic-text-track gsap-reveal text-3d-matte font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight mb-2">
+        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-600/20 bg-emerald-50/80 px-4 py-1.5 text-xs font-semibold text-emerald-900 mb-4 shadow-sm">
+          <NatureZenLeaf className="w-3.5 h-3.5 text-emerald-700" />
+          <span className="font-cinzel tracking-wider text-[11px] font-bold uppercase">
+            DISTRIBUTED EXECUTION MESH
+          </span>
+        </div>
+        <h2 className="cinematic-text-track gsap-reveal font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight text-slate-900 mb-2">
           SYSTEMS ARCHITECT
         </h2>
-        <h2 className="cinematic-text-days gsap-reveal text-silver-matte font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter">
-          AUTOMATION & AI
+        <h2 className="cinematic-text-days gsap-reveal font-cinzel text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-sky-700 to-orange-600">
+          DISTRIBUTED & AGENTIC
         </h2>
       </div>
 
@@ -314,14 +324,14 @@ export default function CinematicSection() {
           ref={cardRef}
           onMouseMove={handleCardMouseMove}
           onMouseLeave={handleCardMouseLeave}
-          className="cinematic-main-card premium-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[94vw] md:w-[86vw] h-[92vh] md:h-[86vh] rounded-[28px] md:rounded-[38px]"
+          className="cinematic-main-card ceramic-depth-card relative overflow-hidden gsap-reveal flex items-center justify-center pointer-events-auto w-[94vw] md:w-[86vw] h-[92vh] md:h-[86vh] rounded-[28px] md:rounded-[38px] border border-emerald-900/15"
         >
-          <div className="card-sheen" aria-hidden="true" />
+          <div className="ceramic-sheen" aria-hidden="true" />
 
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
             {/* Right Headline / Brand Display */}
             <div className="cinematic-card-right gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="font-cinzel text-5xl md:text-[5rem] lg:text-[6.5rem] font-black uppercase tracking-tighter text-card-silver-matte text-center lg:text-right">
+              <h2 className="font-cinzel text-5xl md:text-[5rem] lg:text-[6.5rem] font-black uppercase tracking-tighter text-slate-800/15 text-center lg:text-right select-none">
                 CRAFTSMAN
               </h2>
             </div>
@@ -334,41 +344,41 @@ export default function CinematicSection() {
               <div className="relative w-full h-full flex items-center justify-center transform scale-[0.68] md:scale-85 lg:scale-100">
                 <div
                   ref={phoneRef}
-                  className="relative w-[280px] h-[570px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform"
+                  className="relative w-[280px] h-[570px] rounded-[3rem] iphone-ceramic-bezel flex flex-col will-change-transform"
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   {/* Hardware Buttons */}
-                  <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[160px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[220px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[170px] -right-[3px] w-[3px] h-[70px] hardware-btn rounded-r-md z-0 scale-x-[-1]" aria-hidden="true" />
+                  <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] ceramic-hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[160px] -left-[3px] w-[3px] h-[45px] ceramic-hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[220px] -left-[3px] w-[3px] h-[45px] ceramic-hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[170px] -right-[3px] w-[3px] h-[70px] ceramic-hardware-btn rounded-r-md z-0 scale-x-[-1]" aria-hidden="true" />
 
                   {/* Phone Screen Canvas */}
-                  <div className="absolute inset-[7px] bg-[#070314] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,1)] text-white z-10">
+                  <div className="absolute inset-[7px] bg-[#070e17] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.9)] text-white z-10">
                     <div className="absolute inset-0 screen-glare z-40 pointer-events-none" aria-hidden="true" />
 
                     {/* Dynamic Island Notch */}
                     <div className="absolute top-[5px] left-1/2 -translate-x-1/2 w-[100px] h-[26px] bg-black rounded-full z-50 flex items-center justify-end px-3 shadow-[inset_0_-1px_2px_rgba(255,255,255,0.1)]">
-                      <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.9)] animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)] animate-pulse" />
                     </div>
 
                     <div className="relative w-full h-full pt-11 px-4 pb-6 flex flex-col">
                       {/* Top Header */}
                       <div className="cinematic-phone-widget flex justify-between items-center mb-5">
                         <div className="flex flex-col">
-                          <span className="text-[9px] text-amber-400/90 uppercase tracking-widest font-bold">
+                          <span className="text-[9px] text-emerald-400 uppercase tracking-widest font-bold">
                             ENGINE TELEMETRY
                           </span>
                           <span className="text-base font-bold font-cinzel tracking-tight text-white">
                             Akash Systems
                           </span>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-amber-400/10 text-amber-300 flex items-center justify-center font-bold text-xs border border-amber-400/30">
+                        <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-xs border border-emerald-400/30">
                           AJ
                         </div>
                       </div>
 
-                      {/* Circular Gauge */}
+                      {/* Circular Progress Gauge */}
                       <div className="cinematic-phone-widget relative w-36 h-36 mx-auto flex items-center justify-center mb-5 drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)]">
                         <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
                           <circle cx="72" cy="72" r="52" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="9" />
@@ -378,7 +388,7 @@ export default function CinematicSection() {
                             cy="72"
                             r="52"
                             fill="none"
-                            stroke="#fbbf24"
+                            stroke="#10b981"
                             strokeWidth="9"
                           />
                         </svg>
@@ -386,41 +396,41 @@ export default function CinematicSection() {
                           <span className="counter-val text-2xl font-extrabold tracking-tighter text-white font-cinzel">
                             0
                           </span>
-                          <span className="text-[7.5px] text-amber-200/70 uppercase tracking-[0.15em] font-bold mt-0.5">
+                          <span className="text-[7.5px] text-emerald-200/80 uppercase tracking-[0.15em] font-bold mt-0.5">
                             Shipped Systems
                           </span>
                         </div>
                       </div>
 
-                      {/* Live System Widgets */}
+                      {/* Live System Telemetry Widgets */}
                       <div className="space-y-2">
-                        <div className="cinematic-phone-widget widget-depth rounded-xl p-2 flex items-center border border-cyan-400/20">
+                        <div className="cinematic-phone-widget ceramic-widget-depth rounded-xl p-2 flex items-center border border-cyan-400/20">
                           <div className="w-7 h-7 rounded-lg bg-cyan-500/20 flex items-center justify-center mr-2 border border-cyan-400/30">
                             <Bot className="w-3.5 h-3.5 text-cyan-400" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-[11px] font-bold text-white tracking-tight truncate">Astra AI Workspace</div>
-                            <div className="text-[9px] text-cyan-300/70 truncate">astra.ai · Multimodal Router</div>
+                            <div className="text-[9px] text-cyan-300/80 truncate">astra.ai · Multimodal Router</div>
                           </div>
                         </div>
 
-                        <div className="cinematic-phone-widget widget-depth rounded-xl p-2 flex items-center border border-amber-400/20">
-                          <div className="w-7 h-7 rounded-lg bg-amber-500/20 flex items-center justify-center mr-2 border border-amber-400/30">
-                            <Network className="w-3.5 h-3.5 text-amber-400" />
+                        <div className="cinematic-phone-widget ceramic-widget-depth rounded-xl p-2 flex items-center border border-emerald-400/20">
+                          <div className="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center mr-2 border border-emerald-400/30">
+                            <Network className="w-3.5 h-3.5 text-emerald-400" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-[11px] font-bold text-white tracking-tight truncate">TandemFlow Sync Mesh</div>
-                            <div className="text-[9px] text-amber-300/70 truncate">sync.evolnex.digital · 246 Synced Nodes</div>
+                            <div className="text-[9px] text-emerald-300/80 truncate">246 Synced Nodes · &lt;4ms Mutex</div>
                           </div>
                         </div>
 
-                        <div className="cinematic-phone-widget widget-depth rounded-xl p-2 flex items-center border border-purple-400/20">
-                          <div className="w-7 h-7 rounded-lg bg-purple-500/20 flex items-center justify-center mr-2 border border-purple-400/30">
-                            <FileText className="w-3.5 h-3.5 text-purple-400" />
+                        <div className="cinematic-phone-widget ceramic-widget-depth rounded-xl p-2 flex items-center border border-orange-400/20">
+                          <div className="w-7 h-7 rounded-lg bg-orange-500/20 flex items-center justify-center mr-2 border border-orange-400/30">
+                            <FileText className="w-3.5 h-3.5 text-orange-400" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-[11px] font-bold text-white tracking-tight truncate">AstraQuote Quoting SaaS</div>
-                            <div className="text-[9px] text-purple-300/70 truncate">astraquote.com · Swiss VAT</div>
+                            <div className="text-[9px] text-orange-300/80 truncate">astraquote.com · Swiss VAT</div>
                           </div>
                         </div>
                       </div>
@@ -431,24 +441,24 @@ export default function CinematicSection() {
                   </div>
                 </div>
 
-                {/* Floating 3D Badges */}
-                <div className="cinematic-badge absolute flex top-6 lg:top-10 left-[-10px] lg:left-[-70px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-cyan-500/20 to-cyan-900/10 flex items-center justify-center border border-cyan-400/40">
-                    <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 text-cyan-400" />
+                {/* Floating 3D Ceramic Badges */}
+                <div className="cinematic-badge absolute flex top-6 lg:top-10 left-[-10px] lg:left-[-70px] floating-ceramic-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sky-50 flex items-center justify-center border border-sky-300">
+                    <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 text-sky-700" />
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">BossConsole</p>
-                    <p className="text-cyan-200/60 text-[10px] lg:text-xs font-medium">100+ MCP Tools JVM</p>
+                    <p className="text-slate-900 text-xs lg:text-sm font-bold tracking-tight">BossConsole</p>
+                    <p className="text-sky-700 text-[10px] lg:text-xs font-semibold">100+ MCP Tools JVM</p>
                   </div>
                 </div>
 
-                <div className="cinematic-badge absolute flex bottom-12 lg:bottom-16 right-[-10px] lg:right-[-70px] floating-ui-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-b from-amber-500/20 to-amber-900/10 flex items-center justify-center border border-amber-400/40">
-                    <Network className="w-4 h-4 lg:w-5 lg:h-5 text-amber-300" />
+                <div className="cinematic-badge absolute flex bottom-12 lg:bottom-16 right-[-10px] lg:right-[-70px] floating-ceramic-badge rounded-xl lg:rounded-2xl p-3 lg:p-4 items-center gap-3 z-30">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-300">
+                    <Network className="w-4 h-4 lg:w-5 lg:h-5 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="text-white text-xs lg:text-sm font-bold tracking-tight">TandemFlow</p>
-                    <p className="text-amber-200/60 text-[10px] lg:text-xs font-medium">246-Node Redis Mutex</p>
+                    <p className="text-slate-900 text-xs lg:text-sm font-bold tracking-tight">TandemFlow</p>
+                    <p className="text-emerald-700 text-[10px] lg:text-xs font-semibold">246-Node Redis Mutex</p>
                   </div>
                 </div>
               </div>
@@ -456,11 +466,15 @@ export default function CinematicSection() {
 
             {/* Left Narrative / Overview */}
             <div className="cinematic-card-left gsap-reveal order-3 lg:order-1 flex flex-col justify-center text-center lg:text-left z-20 w-full px-4 lg:px-0">
-              <h3 className="text-white font-cinzel text-2xl md:text-3xl lg:text-4xl font-bold mb-3 lg:mb-4 tracking-tight">
-                High-throughput digital machines.
+              <div className="inline-flex items-center gap-1.5 self-center lg:self-start rounded-full bg-emerald-100/60 border border-emerald-600/20 px-3 py-1 text-[11px] font-mono font-bold text-emerald-900 mb-3">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span>HIGH-THROUGHPUT RUNTIMES</span>
+              </div>
+              <h3 className="text-slate-900 font-cinzel text-2xl md:text-3xl lg:text-4xl font-bold mb-3 lg:mb-4 tracking-tight">
+                Digital Machines Crafted for Extreme Scale.
               </h3>
-              <p className="text-stone-300 text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-md lg:max-w-none">
-                Engineering autonomous AI pipelines, high-converting platforms, and scalable CRMs. From multi-model LLM routing at <span className="text-amber-300 font-semibold">astra.ai</span> to restaurant POS automation at <span className="text-amber-300 font-semibold">royal-bar-restaurant.com</span>.
+              <p className="text-slate-600 text-sm md:text-base lg:text-lg font-normal leading-relaxed mx-auto lg:mx-0 max-w-md lg:max-w-none">
+                Engineering autonomous AI pipelines, resilient multi-threaded JVM agents, and low-latency state synchronization meshes. From multi-model LLM routing at <span className="text-emerald-800 font-bold">astra.ai</span> to high-throughput Redis locking in <span className="text-emerald-800 font-bold">TandemFlow</span>.
               </p>
             </div>
           </div>
@@ -469,27 +483,27 @@ export default function CinematicSection() {
 
       {/* Stage 3: Pullback CTA Stage */}
       <div className="cinematic-cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto will-change-transform">
-        <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tight text-silver-matte">
-          Ready to automate your vision?
+        <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tight text-slate-900">
+          Ready to Architect Resilient Systems?
         </h2>
-        <p className="text-stone-300 text-base md:text-lg mb-8 max-w-xl mx-auto font-light leading-relaxed">
-          Explore client builds, custom language model architectures, and production systems below.
+        <p className="text-slate-600 text-base md:text-lg mb-8 max-w-xl mx-auto font-normal leading-relaxed">
+          Explore sovereign distributed builds, custom agent runtimes, and client infrastructure below.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="#projects"
-            className="btn-modern-light flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-cinzel font-bold text-sm text-fable-midnight shadow-xl"
+            href="#systems"
+            className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-cinzel font-bold text-sm bg-emerald-800 hover:bg-emerald-900 text-white shadow-xl shadow-emerald-900/15 transition-all hover:scale-105"
           >
-            <span>Explore All Projects</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Explore Sovereign Systems</span>
+            <ArrowRight className="w-4 h-4 text-emerald-200" />
           </a>
           <a
             href="#closing"
-            className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-cinzel font-semibold text-sm text-white shadow-xl border border-white/20"
+            className="inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full font-cinzel font-semibold text-sm bg-white hover:bg-slate-50 text-slate-900 shadow-md border border-slate-300 transition-all hover:scale-105"
           >
-            <Mail className="w-4 h-4 text-amber-400" />
-            <span>Work With Me</span>
+            <Mail className="w-4 h-4 text-emerald-700" />
+            <span>Direct Dispatch</span>
           </a>
         </div>
       </div>
