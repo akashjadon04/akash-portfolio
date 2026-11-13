@@ -166,7 +166,7 @@ export default function CinematicSection() {
         // Phase 2: Ceramic hardware mockup & live telemetry widgets smoothly appear
         .fromTo(
           ".cinematic-mockup-wrapper",
-          { y: 180, z: -300, rotationX: 30, rotationY: -18, autoAlpha: 0, scale: 0.8 },
+          { y: 160, z: -250, rotationX: 25, rotationY: -15, autoAlpha: 0, scale: 0.85 },
           {
             y: 0,
             z: 0,
@@ -175,10 +175,22 @@ export default function CinematicSection() {
             autoAlpha: 1,
             scale: 1,
             ease: "expo.out",
-            duration: 2.2,
+            duration: 2.0,
             force3D: true,
           },
-          "-=0.8"
+          "phoneEnter-=0.6"
+        )
+        .fromTo(
+          ".cinematic-card-left",
+          { x: -45, autoAlpha: 0 },
+          { x: 0, autoAlpha: 1, ease: "power3.out", duration: 1.6, force3D: true },
+          "phoneEnter"
+        )
+        .fromTo(
+          ".cinematic-card-right",
+          { x: 45, autoAlpha: 0, scale: 0.9 },
+          { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.6, force3D: true },
+          "phoneEnter"
         )
         .fromTo(
           ".cinematic-phone-widget",
@@ -192,7 +204,7 @@ export default function CinematicSection() {
             duration: 1.5,
             force3D: true,
           },
-          "-=1.5"
+          "-=1.2"
         )
         .to(
           ".progress-ring",
@@ -211,31 +223,21 @@ export default function CinematicSection() {
         )
         .fromTo(
           ".cinematic-badge",
-          { y: 50, autoAlpha: 0, scale: 0.8, rotationZ: -6 },
+          { y: 40, autoAlpha: 0, scale: 0.85, rotationZ: -5 },
           {
             y: 0,
             autoAlpha: 1,
             scale: 1,
             rotationZ: 0,
             ease: "back.out(1.4)",
-            duration: 1.5,
+            duration: 1.4,
             stagger: 0.15,
             force3D: true,
           },
-          "-=1.8"
+          "-=1.4"
         )
-        .fromTo(
-          ".cinematic-card-left",
-          { x: -35, autoAlpha: 0 },
-          { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5, force3D: true },
-          "-=1.5"
-        )
-        .fromTo(
-          ".cinematic-card-right",
-          { x: 35, autoAlpha: 0, scale: 0.9 },
-          { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5, force3D: true },
-          "<"
-        )
+        // Generous viewing hold so the visitor can comfortably admire the phone and systems
+        .to({}, { duration: 1.4 })
         // Phase 3: Transition to pullback stage
         .to({}, { duration: 0.4 })
         .set(".cinematic-hero-text", { autoAlpha: 0 })
@@ -331,7 +333,7 @@ export default function CinematicSection() {
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
             {/* Right Headline / Brand Display */}
             <div className="cinematic-card-right gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full">
-              <h2 className="font-cinzel text-5xl md:text-[5rem] lg:text-[6.5rem] font-black uppercase tracking-tighter text-slate-800/15 text-center lg:text-right select-none">
+              <h2 className="font-cinzel text-5xl md:text-[5rem] lg:text-[6.5rem] font-black uppercase tracking-tighter text-slate-900/30 text-center lg:text-right select-none">
                 CRAFTSMAN
               </h2>
             </div>
